@@ -1,8 +1,10 @@
+import { Button } from "./shared/components/Button/Button";
+
 function App() {
-  const test = "jopa";
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <h1 className="text-3xl font-roboto underline">Hello world!</h1>
+      <Button intent="accent">test</Button>
     </>
   );
 }
