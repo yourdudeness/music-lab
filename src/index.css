@@ -45,6 +45,14 @@
 
   --radius-1: var(--6px);
   --radius-2: var(--12px);
+
+  --size-10: var(--278px);
+  --size-1: var(--40px);
+  --size-2: var(--52px);
+
+  --text-color: #d0cece;
+
+  --padding-1: var(--8px);
 }
 
 a {

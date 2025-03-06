@@ -10,10 +10,16 @@ interface ButtonPrimitiveProps
 
 export const Button = ({
   children,
-  intent = "neutral"
+  className,
+  intent = "neutral",
+  ...props
 }: ButtonPrimitiveProps) => {
   return (
-    <button className={clsx(styles.root)} data-intent={intent}>
+    <button
+      className={clsx(styles.root, className)}
+      data-intent={intent}
+      {...props}
+    >
       {children}
     </button>
   );
