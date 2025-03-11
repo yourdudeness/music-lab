@@ -1,5 +1,5 @@
 .root {
-  --_button-width: var(--size-10);
+  --_button-width: var(--size-7);
   --_button-height: var(--size-2);
   --_button-color: var(--black-1);
   --_button-bg: var(--white-1);

@@ -1,5 +1,5 @@
 .root {
-  --_input-width: var(--size-10);
+  --_input-width: var(--size-7);
   --_input-height: var(--size-1);
   --_input-bg: var(--white-1);
   --_input-border-color: var(--border-color);

@@ -29,6 +29,7 @@
   --48px: 3rem;
   --52px: 3.25rem;
   --278px: 17.375rem;
+  --366px: 22.875;
 
   --violet-1: #580ea2;
   --violet-2: #3f007d;
@@ -46,7 +47,8 @@
   --radius-1: var(--6px);
   --radius-2: var(--12px);
 
-  --size-10: var(--278px);
+  --size-7: var(--278px);
+  --size-8: var(--366px);
   --size-1: var(--40px);
   --size-2: var(--52px);
 
