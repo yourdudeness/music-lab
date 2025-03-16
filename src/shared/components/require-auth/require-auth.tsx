@@ -10,7 +10,11 @@ export const RequireAuth = ({ children }: Props) => {
   const auth = useAuth();
   const location = useLocation();
 
-  if (!auth.user) {
+  if (auth.loading && !auth.user) {
+    return <>Загрузка....</>;
+  }
+
+  if (!auth.user && !auth.loading) {
     return <Navigate to="/sign-in" state={{ from: location }} replace={true} />;
   }
 

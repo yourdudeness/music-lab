@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUser, UserData } from "../api/user/get-user";
 import { use, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
+import { useAuth } from "../../contexts/use-auth";
 
 type Props = {
   onSuccess?: (data: UserData) => void;
@@ -24,12 +26,10 @@ export const useCurrentUser = ({ onSuccess, onError }: Props) => {
   }, [isSuccess, data]);
 
   useEffect(() => {
-    if (isSuccess && onError) {
+    if (isError && onError) {
       onError(data);
     }
   }, [isError, data]);
-
-  console.log(data, isSuccess, "data current user");
 
   return { data, error, isLoading, isError, isSuccess, refetch };
 };

@@ -23,20 +23,20 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401) {
       // console.log("refresh token");
       originalRequest._retry = true;
-      // try {
-      //   await apiClient.post<RefreshTokenData>(
-      //     "/auth/refresh",
-      //     {},
-      //     {
-      //       withCredentials: true
-      //     }
-      //   );
-      //   return apiClient(originalRequest);
-      // } catch (error) {
-      //   if (!isAuthPage) {
-      //     window.location.href = "/sign-in";
-      //   }
-      // }
+      try {
+        await apiClient.post<RefreshTokenData>(
+          "/auth/refresh",
+          {},
+          {
+            withCredentials: true
+          }
+        );
+        return apiClient(originalRequest);
+      } catch (error) {
+        if (!isAuthPage) {
+          window.location.href = "/sign-in";
+        }
+      }
     }
   }
 );

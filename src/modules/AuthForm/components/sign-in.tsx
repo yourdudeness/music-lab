@@ -9,20 +9,7 @@ import { SignInParams } from "../api/user";
 import { useAuth } from "../../../contexts/use-auth";
 
 export const SignInForm = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const auth = useAuth();
-
-  const signInMutation = useSignIn({
-    onSuccess(data) {
-      const from = location.state?.from?.pathname || "/";
-
-      auth.signIn(() => {
-        navigate(from);
-      });
-      auth.setToken(data.accessToken);
-    }
-  });
+  const signInMutation = useSignIn();
 
   const {
     register,
@@ -33,7 +20,7 @@ export const SignInForm = () => {
 
   const onSubmit: SubmitHandler<SignInParams> = async (data) => {
     try {
-      await signInMutation.mutate({
+      signInMutation.mutate({
         email: data.email,
         password: data.password
       });
