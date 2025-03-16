@@ -1,1 +1,1 @@
-// export { RegistratonForm } from "./components/RegistrationForm/RegistrationForm"
+export * from "./components/sign-up";

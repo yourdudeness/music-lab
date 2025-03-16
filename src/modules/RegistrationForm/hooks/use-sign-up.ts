@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { SignInData, SignInParams, signIn } from "../api/user";
+import { SignInData, SignUpParams, signUp } from "../api/user";
 
-export const useSignIn = () => {
+export const useSignUp = () => {
   const mutation = useMutation({
-    mutationKey: ["auth"],
-    mutationFn: signIn,
+    mutationKey: ["sign-in"],
+    mutationFn: signUp,
     onSuccess: (data) => {
       console.log("Успешный вход:", data);
     },

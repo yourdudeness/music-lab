@@ -1,39 +1,26 @@
+import React from "react";
 import { AuthFormContainer } from "../../../shared/components/AuthForm";
 
-import { Input } from "../../../shared/components/Input";
-import { Button } from "../../../shared/components/Button";
-import { useSignIn } from "../hooks/use-sign-in";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router";
-import { SignInParams } from "../api/user";
-import { useAuth } from "../../../contexts/use-auth";
+import { Link } from "react-router";
+import { Button } from "../../../shared/components/Button";
+import { Input } from "../../../shared/components/Input";
+import { useSignUp } from "../hooks/use-sign-up";
+import { SignUpParams } from "../api/user";
 
-export const SignInForm = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const auth = useAuth();
-
-  const signInMutation = useSignIn({
-    onSuccess(data) {
-      const from = location.state?.from?.pathname || "/";
-
-      auth.signIn(() => {
-        navigate(from);
-      });
-      auth.setToken(data.accessToken);
-    }
-  });
+export const SignUpForm = () => {
+  const signUpMutation = useSignUp();
 
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting } //errors for errors text, isSubmiting for loading form
-  } = useForm<SignInParams>({ shouldUseNativeValidation: true });
+  } = useForm<SignUpParams>({ shouldUseNativeValidation: true });
 
-  const onSubmit: SubmitHandler<SignInParams> = async (data) => {
+  const onSubmit: SubmitHandler<SignUpParams> = async (data) => {
     try {
-      await signInMutation.mutate({
+      await signUpMutation.mutate({
         email: data.email,
         password: data.password
       });
@@ -42,7 +29,7 @@ export const SignInForm = () => {
       //   type: "manual",
       //   message: "Invalid email or password"
       // });
-      console.log(error, "error");
+      console.log(error);
     }
   };
   return (
@@ -76,9 +63,8 @@ export const SignInForm = () => {
         <span className="text-red-500">{errors.password.message}</span>
       )}
       <Button type="submit" intent="accent" className="mb-5">
-        Войти
+        Зарегистрироваться
       </Button>
-      <Link to="/sign-up">Зарегистрироваться</Link>
     </AuthFormContainer>
   );
 };

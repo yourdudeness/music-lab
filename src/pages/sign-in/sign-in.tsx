@@ -1,4 +1,3 @@
-import React from "react";
 import { SignInForm } from "../../modules/AuthForm";
 
 export const SignInPage = () => {
