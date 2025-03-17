@@ -29,7 +29,6 @@ export const useSignIn = () => {
   useEffect(() => {
     if (isSuccess) {
       const from = location.state?.from?.pathname || "/";
-      auth.setToken(data.accessToken);
       auth.signIn(() => {
         navigate(from);
       });

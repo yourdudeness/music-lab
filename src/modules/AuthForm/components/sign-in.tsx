@@ -6,7 +6,8 @@ import { useSignIn } from "../hooks/use-sign-in";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import { SignInParams } from "../api/user";
-import { useAuth } from "../../../contexts/use-auth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./schema";
 
 export const SignInForm = () => {
   const signInMutation = useSignIn();
@@ -16,7 +17,10 @@ export const SignInForm = () => {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting } //errors for errors text, isSubmiting for loading form
-  } = useForm<SignInParams>({ shouldUseNativeValidation: true });
+  } = useForm<SignInParams>({
+    shouldUseNativeValidation: true,
+    resolver: yupResolver(schema)
+  });
 
   const onSubmit: SubmitHandler<SignInParams> = async (data) => {
     try {
@@ -36,33 +40,17 @@ export const SignInForm = () => {
     <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
       <Input
         placeholder="Логин"
-        className="mb-7"
-        {...register("email", {
-          required: "Email is required",
-          validate: (value: string) => {
-            if (!value.includes("@")) {
-              return "Email must include @";
-            }
-            return true;
-          }
-        })}
+        {...register("email")}
+        errorMessage={errors.email?.message}
       />
-      {errors.email && (
-        <span className="text-red-500">{errors.email.message}</span>
-      )}
       <Input
         placeholder="Пароль"
-        className="mb-15"
-        {...register("password", {
-          required: "Password is required",
-          minLength: 4
-        })}
+        className="mt-7"
+        {...register("password")}
         type="password"
+        errorMessage={errors.password?.message}
       />
-      {errors.password && (
-        <span className="text-red-500">{errors.password.message}</span>
-      )}
-      <Button type="submit" intent="accent" className="mb-5">
+      <Button type="submit" intent="accent" className="mb-5 mt-15">
         Войти
       </Button>
       <Link to="/sign-up">Зарегистрироваться</Link>

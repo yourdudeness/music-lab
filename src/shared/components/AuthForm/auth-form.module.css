@@ -1,9 +1,10 @@
 .root {
-  --_form-width: var(--size-8);
+  --_form-wrap: var(--size-8);
   --_form-radius: var(--radius-2);
   --_form-bg: var(--white-1);
+  --_form-width: var(--size-7);
 
-  inline-size: var(--_form-width);
+  inline-size: var(--_form-wrap);
   border-radius: var(--_form-radius);
   background-color: var(--_form-bg);
   display: flex;
@@ -16,4 +17,5 @@
 .form {
   display: flex;
   flex-direction: column;
+  inline-size: var(--_form-width);
 }

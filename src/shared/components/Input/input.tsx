@@ -2,8 +2,19 @@ import clsx from "clsx";
 import React from "react";
 import styles from "./input.module.css";
 
-interface InputProps extends React.ComponentPropsWithoutRef<"input"> {}
+interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
+  errorMessage?: string | undefined;
+}
 
-export const Input = ({ className, ...props }: InputProps) => {
-  return <input {...props} className={clsx(styles.root, className)} />;
+export const Input = ({ className, errorMessage, ...props }: InputProps) => {
+  return (
+    <div className={clsx(styles.wrapper, className)}>
+      <input {...props} className={clsx(styles.root, className)} />
+      {errorMessage !== undefined && (
+        <span className={clsx("text-red-500", styles.error, className)}>
+          {errorMessage}
+        </span>
+      )}
+    </div>
+  );
 };

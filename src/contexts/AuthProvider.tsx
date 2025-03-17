@@ -1,72 +1,48 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useState
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AuthContext } from "./context";
 import { useCurrentUser } from "../shared/hooks/use-current-user";
 import { UserData } from "../shared/api/user/get-user";
 import { useRefreshToken } from "../shared/hooks/use-refresh-token";
-import { apiClient } from "../shared/api/http-client";
 
 type Props = { children: React.ReactNode };
 
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<UserData | null>(null);
-
-  const storedToken = localStorage.getItem("token");
-  const [token, setToken_] = useState(storedToken);
-
-  //   if (storedToken) {
-  //     apiClient.defaults.headers.common["Authorization"] =
-  //       "Bearer " + storedToken;
-  //   }
+  const [loading, setLoading] = useState<boolean>(true);
 
   const currentUser = useCurrentUser({
     onSuccess: (data) => {
       setUser(data);
+      setLoading(false);
     },
-    onError: () => {
+    onError() {
       setUser(null);
+      setLoading(false);
     }
   });
 
-  //   const refreshTokenMutation = useRefreshToken({
-  //     onSuccess: () => currentUser.refetch()
-  //   });
+  const refreshTokenMutation = useRefreshToken({
+    onSuccess: () => currentUser.refetch()
+  });
 
-  const setToken = (newToken: string | null) => {
-    setToken_(newToken);
-  };
+  useEffect(() => {
+    if (currentUser.isLoading || refreshTokenMutation.isPending) {
+      setLoading(true);
+    }
+  }, [currentUser.isLoading, refreshTokenMutation.isPending]);
 
   const signIn = useCallback((callback: VoidFunction) => {
     currentUser.refetch();
     callback();
-
-    console.log("sign in");
   }, []);
-
-  useLayoutEffect(() => {
-    if (token) {
-      apiClient.defaults.headers.common["Authorization"] = "Bearer " + token;
-      localStorage.setItem("token", token);
-    } else {
-      delete apiClient.defaults.headers.common["Authorization"];
-      localStorage.removeItem("token");
-    }
-  }, [token]);
 
   const contextValue = useMemo(
     () => ({
-      user: user,
-      token,
-      loading: currentUser.isLoading,
-      setToken,
+      user,
+      loading,
       signIn
     }),
-    [token, user, currentUser.isLoading]
+    [user, loading, signIn]
   );
 
   return (

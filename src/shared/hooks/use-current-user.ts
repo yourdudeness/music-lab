@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUser, UserData } from "../api/user/get-user";
-import { use, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
-import { useAuth } from "../../contexts/use-auth";
+import { useEffect } from "react";
 
 type Props = {
   onSuccess?: (data: UserData) => void;
