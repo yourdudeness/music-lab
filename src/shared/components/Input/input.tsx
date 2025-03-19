@@ -9,9 +9,9 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
 export const Input = ({ className, errorMessage, ...props }: InputProps) => {
   return (
     <div className={clsx(styles.wrapper, className)}>
-      <input {...props} className={clsx(styles.root, className)} />
+      <input {...props} className={clsx(styles.root)} />
       {errorMessage !== undefined && (
-        <span className={clsx("text-red-500", styles.error, className)}>
+        <span className={clsx("text-red-500 text-sm", styles.error)}>
           {errorMessage}
         </span>
       )}

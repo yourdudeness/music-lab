@@ -5,5 +5,8 @@ export const schema = yup.object().shape({
   password: yup
     .string()
     .min(4, "Минимальная длина пароля 4 символа")
-    .required("Пароль обязательное поле")
+    .required("Пароль обязательное поле"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Пароли должны совпадать")
 });

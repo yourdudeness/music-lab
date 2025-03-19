@@ -1,15 +1,20 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { SignInData, SignUpParams, signUp } from "../api/user";
 
-export const useSignUp = () => {
+type Props = {
+  onSuccess?: () => void;
+  onError?: (error: any) => void; // fix any
+};
+
+export const useSignUp = ({ onSuccess, onError }: Props) => {
   const mutation = useMutation({
     mutationKey: ["sign-in"],
     mutationFn: signUp,
     onSuccess: (data) => {
-      console.log("Успешный вход:", data);
+      onSuccess?.();
     },
     onError: (error) => {
-      console.error("Ошибка входа:", error);
+      onError?.(error);
     }
   });
 

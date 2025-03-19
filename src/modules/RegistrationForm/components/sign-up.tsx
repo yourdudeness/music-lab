@@ -2,69 +2,85 @@ import React from "react";
 import { AuthFormContainer } from "../../../shared/components/AuthForm";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import { Button } from "../../../shared/components/Button";
 import { Input } from "../../../shared/components/Input";
 import { useSignUp } from "../hooks/use-sign-up";
 import { SignUpParams } from "../api/user";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./schema";
+
+interface SignUpFormData extends SignUpParams {
+  confirmPassword: string;
+}
 
 export const SignUpForm = () => {
-  const signUpMutation = useSignUp();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting } //errors for errors text, isSubmiting for loading form
-  } = useForm<SignUpParams>({ shouldUseNativeValidation: true });
+  } = useForm<SignUpFormData>({
+    shouldUseNativeValidation: true,
+    resolver: yupResolver(schema) as any
+  });
 
-  const onSubmit: SubmitHandler<SignUpParams> = async (data) => {
-    try {
-      await signUpMutation.mutate({
-        email: data.email,
-        password: data.password
-      });
-    } catch (error) {
-      // setError("email", {
-      //   type: "manual",
-      //   message: "Invalid email or password"
-      // });
-      console.log(error);
+  const signUpMutation = useSignUp({
+    onSuccess: () => {
+      navigate("/sign-in");
+    },
+    onError: (error) => {
+      if (error.response?.status === 400) {
+        setError("root", {
+          type: "manual",
+          message: "Такой пользователь уже существует"
+        });
+      }
     }
+  });
+
+  const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
+    try {
+      const { confirmPassword, ...submitData } = data;
+      await signUpMutation.mutate({
+        email: submitData.email,
+        password: submitData.password
+      });
+    } catch (error) {}
   };
+
+  console.log(errors.root?.message, "asdfasdf");
   return (
-    <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        placeholder="Логин"
-        className="mb-7"
-        {...register("email", {
-          required: "Email is required",
-          validate: (value: string) => {
-            if (!value.includes("@")) {
-              return "Email must include @";
-            }
-            return true;
-          }
-        })}
-      />
-      {errors.email && (
-        <span className="text-red-500">{errors.email.message}</span>
-      )}
-      <Input
-        placeholder="Пароль"
-        className="mb-15"
-        {...register("password", {
-          required: "Password is required",
-          minLength: 4
-        })}
-        type="password"
-      />
-      {errors.password && (
-        <span className="text-red-500">{errors.password.message}</span>
-      )}
-      <Button type="submit" intent="accent" className="mb-5">
-        Зарегистрироваться
-      </Button>
-    </AuthFormContainer>
+    <>
+      <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          placeholder="Логин"
+          {...register("email")}
+          errorMessage={errors.email?.message}
+        />
+        <Input
+          placeholder="Пароль"
+          className="mt-7"
+          {...register("password")}
+          type="password"
+          errorMessage={errors.password?.message}
+        />
+        <Input
+          placeholder="Повторите пароль"
+          className="mt-7"
+          {...register("confirmPassword")}
+          type="password"
+          errorMessage={errors.confirmPassword?.message}
+        />
+        <Button type="submit" intent="accent" className="mb-5 mt-15">
+          Зарегистрироваться
+        </Button>
+        {errors.root !== undefined && (
+          <span className="text-red-500 ">{errors.root?.message}</span>
+        )}
+      </AuthFormContainer>
+    </>
   );
 };
