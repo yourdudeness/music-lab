@@ -10,7 +10,7 @@ export const Input = ({ className, errorMessage, ...props }: InputProps) => {
   return (
     <div className={clsx(styles.wrapper, className)}>
       <input {...props} className={clsx(styles.root)} />
-      {errorMessage !== undefined && (
+      {Boolean(errorMessage) && (
         <span className={clsx("text-red-500 text-sm", styles.error)}>
           {errorMessage}
         </span>

@@ -15,27 +15,28 @@ let isRefreshing = false;
 let refreshPromise: Promise<string | null> | null = null;
 
 async function refreshToken(): Promise<string | null> {
-  if (!isRefreshing) {
-    isRefreshing = true;
-    try {
-      await apiClient.post<RefreshTokenData>(
-        "/auth/refresh",
-        {},
-        { withCredentials: true }
-      );
-
-      return null;
-    } catch (error) {
-      window.location.href = "/sign-in";
-
-      return null;
-    } finally {
-      isRefreshing = false;
-      refreshPromise = null;
-    }
+  if (isRefreshing) {
+    return refreshPromise || null;
   }
 
-  return refreshPromise || null;
+  isRefreshing = true;
+
+  try {
+    await apiClient.post<RefreshTokenData>(
+      "/auth/refresh",
+      {},
+      { withCredentials: true }
+    );
+
+    return null;
+  } catch (error) {
+    window.location.href = "/sign-in";
+
+    return null;
+  } finally {
+    isRefreshing = false;
+    refreshPromise = null;
+  }
 }
 
 apiClient.interceptors.response.use(

@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthFormContainer } from "../../../shared/components/AuthForm";
 
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -21,10 +20,10 @@ export const SignUpForm = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting } //errors for errors text, isSubmiting for loading form
+    formState: { errors } //errors for errors text, isSubmiting for loading form
   } = useForm<SignUpFormData>({
     shouldUseNativeValidation: true,
-    resolver: yupResolver(schema) as any
+    resolver: yupResolver(schema)
   });
 
   const signUpMutation = useSignUp({
@@ -42,13 +41,12 @@ export const SignUpForm = () => {
   });
 
   const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
-    try {
-      const { confirmPassword, ...submitData } = data;
-      await signUpMutation.mutate({
-        email: submitData.email,
-        password: submitData.password
-      });
-    } catch (error) {}
+    const { confirmPassword, ...submitData } = data;
+
+    await signUpMutation.mutate({
+      email: submitData.email,
+      password: submitData.password
+    });
   };
 
   console.log(errors.root?.message, "asdfasdf");
@@ -77,6 +75,7 @@ export const SignUpForm = () => {
         <Button type="submit" intent="accent" className="mb-5 mt-15">
           Зарегистрироваться
         </Button>
+
         {errors.root !== undefined && (
           <span className="text-red-500 text-sm">{errors.root?.message}</span>
         )}

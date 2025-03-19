@@ -32,12 +32,10 @@ export const SignInForm = () => {
   });
 
   const onSubmit: SubmitHandler<SignInParams> = async (data) => {
-    try {
-      signInMutation.mutate({
-        email: data.email,
-        password: data.password
-      });
-    } catch (error) {}
+    signInMutation.mutate({
+      email: data.email,
+      password: data.password
+    });
   };
   return (
     <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>

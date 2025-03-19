@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { SignInData, SignInParams, signIn } from "../api/user";
+import { useMutation } from "@tanstack/react-query";
+import { SignInData, signIn } from "../api/user";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../../contexts/use-auth";

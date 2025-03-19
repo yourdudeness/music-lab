@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { SignInData, SignUpParams, signUp } from "../api/user";
+import { signUp } from "../api/user";
 
 type Props = {
   onSuccess?: () => void;
@@ -10,7 +10,7 @@ export const useSignUp = ({ onSuccess, onError }: Props) => {
   const mutation = useMutation({
     mutationKey: ["sign-in"],
     mutationFn: signUp,
-    onSuccess: (data) => {
+    onSuccess: () => {
       onSuccess?.();
     },
     onError: (error) => {

@@ -8,18 +8,18 @@ type Props = {
 };
 
 export const useCurrentUser = ({ onSuccess, onError }: Props) => {
-  const { data, error, isLoading, isError, isSuccess, refetch } =
-    useQuery<UserData>({
-      queryKey: ["users/me"],
-      retry: false,
-      retryOnMount: false,
-      queryFn: getUser,
-      select: (data) => data
-    });
+  const query = useQuery<UserData>({
+    queryKey: ["users/me"],
+    retry: false,
+    retryOnMount: false,
+    queryFn: getUser
+  });
+
+  const { data, isError, isSuccess } = query;
 
   useEffect(() => {
-    if (isSuccess && onSuccess) {
-      onSuccess(data);
+    if (isSuccess) {
+      onSuccess?.(data);
     }
   }, [isSuccess, data]);
 
@@ -29,5 +29,5 @@ export const useCurrentUser = ({ onSuccess, onError }: Props) => {
     }
   }, [isError, data]);
 
-  return { data, error, isLoading, isError, isSuccess, refetch };
+  return query;
 };
