@@ -9,21 +9,21 @@ type Props = {
   onError?: (error: any) => void; //error any need to be fixed
 };
 
-export const useSignIn = () => {
+export const useSignIn = ({ onSuccess, onError }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useAuth();
   const { mutate, data, error, isPending, isError, isSuccess } = useMutation({
     mutationKey: ["auth"],
-    mutationFn: signIn
+    mutationFn: signIn,
     // onSuccess: (data) => {
     //   console.log(data, "data");
     //   onSuccess?.(data);
     // },
-    // onError: (error) => {
-    //   console.log(error, "error");
-    //   onError?.(error);
-    // }
+    onError: (error) => {
+      console.log(error, "error");
+      onError?.(error);
+    }
   });
 
   useEffect(() => {
