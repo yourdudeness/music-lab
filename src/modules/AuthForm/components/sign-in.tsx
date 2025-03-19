@@ -4,7 +4,7 @@ import { Input } from "../../../shared/components/Input";
 import { Button } from "../../../shared/components/Button";
 import { useSignIn } from "../hooks/use-sign-in";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { SignInParams } from "../api/user";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
@@ -19,6 +19,10 @@ export const SignInForm = () => {
     shouldUseNativeValidation: true,
     resolver: yupResolver(schema)
   });
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => navigate("/sign-up");
 
   const signInMutation = useSignIn({
     onError: (error) => {
@@ -54,7 +58,7 @@ export const SignInForm = () => {
       <Button type="submit" intent="accent" className="mb-5 mt-15">
         Войти
       </Button>
-      <Link to="/sign-up">Зарегистрироваться</Link>
+      <Button onClick={handleNavigate}>Зарегистрироваться</Button>
       {errors.root !== undefined && (
         <span className="text-red-500 text-sm">{errors.root?.message}</span>
       )}

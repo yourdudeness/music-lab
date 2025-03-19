@@ -49,7 +49,6 @@ export const SignUpForm = () => {
     });
   };
 
-  console.log(errors.root?.message, "asdfasdf");
   return (
     <>
       <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
