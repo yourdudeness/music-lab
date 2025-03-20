@@ -59,7 +59,7 @@ export const SignInForm = () => {
         Войти
       </Button>
       <Button onClick={handleNavigate}>Зарегистрироваться</Button>
-      {errors.root !== undefined && (
+      {Boolean(errors.root) && (
         <span className="text-red-500 text-sm">{errors.root?.message}</span>
       )}
     </AuthFormContainer>

@@ -75,7 +75,7 @@ export const SignUpForm = () => {
           Зарегистрироваться
         </Button>
 
-        {errors.root !== undefined && (
+        {Boolean(errors.root) && (
           <span className="text-red-500 text-sm">{errors.root?.message}</span>
         )}
       </AuthFormContainer>

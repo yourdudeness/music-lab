@@ -9,22 +9,20 @@ type Props = {
   onError?: (error: any) => void; //error any need to be fixed
 };
 
-export const useSignIn = ({ onSuccess, onError }: Props) => {
+export const useSignIn = ({ onError }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useAuth();
-  const { mutate, data, error, isPending, isError, isSuccess } = useMutation({
+  const query = useMutation({
     mutationKey: ["auth"],
     mutationFn: signIn,
-    // onSuccess: (data) => {
-    //   console.log(data, "data");
-    //   onSuccess?.(data);
-    // },
     onError: (error) => {
       console.log(error, "error");
       onError?.(error);
     }
   });
+
+  const { isSuccess } = query;
 
   useEffect(() => {
     if (isSuccess) {
@@ -34,5 +32,6 @@ export const useSignIn = ({ onSuccess, onError }: Props) => {
       });
     }
   }, [isSuccess]);
-  return { mutate, data, error, isPending, isError, isSuccess };
+
+  return query;
 };

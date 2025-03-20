@@ -1,4 +1,4 @@
-import { SignInForm } from "../../modules/AuthForm";
+import { SignInForm } from "../../modules/sign-in";
 import { useRedirectToMain } from "../../shared/hooks/use-redirect-to-main";
 
 export const SignInPage = () => {

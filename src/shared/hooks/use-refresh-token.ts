@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const useRefreshToken = ({ onSuccess, onError }: Props) => {
-  const { mutate, data, error, isPending, isError, isSuccess } = useMutation({
+  const query = useMutation({
     mutationKey: ["refreshToken"],
     mutationFn: refreshToken,
     onSuccess: (data) => {
@@ -20,5 +20,5 @@ export const useRefreshToken = ({ onSuccess, onError }: Props) => {
     }
   });
 
-  return { mutate, data, error, isPending, isError, isSuccess };
+  return query;
 };

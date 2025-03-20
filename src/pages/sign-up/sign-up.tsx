@@ -1,4 +1,4 @@
-import { SignUpForm } from "../../modules/RegistrationForm";
+import { SignUpForm } from "../../modules/sign-up";
 import { useRedirectToMain } from "../../shared/hooks/use-redirect-to-main";
 
 export const SignUpPage = () => {
