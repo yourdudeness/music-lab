@@ -1,11 +1,9 @@
 import axios from "axios";
 import { RefreshTokenData } from "./user/refresh-token";
 
-export const API_URL = `http://localhost:3000/api`;
-
 export const apiClient = axios.create({
   withCredentials: true,
-  baseURL: API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-type": "application/json"
   }
