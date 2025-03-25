@@ -41,6 +41,7 @@ export const SignInForm = () => {
       password: data.password
     });
   };
+
   return (
     <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
       <Input
