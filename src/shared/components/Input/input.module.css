@@ -22,9 +22,5 @@
 }
 .wrapper {
   position: relative;
-}
-.error {
-  position: absolute;
-  left: 0;
-  bottom: -75%;
+  block-size: var(--size-3);
 }

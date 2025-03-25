@@ -51,12 +51,11 @@ export const SignInForm = () => {
       />
       <Input
         placeholder="Пароль"
-        className="mt-7"
         {...register("password")}
         type="password"
         errorMessage={errors.password?.message}
       />
-      <Button type="submit" intent="accent" className="mb-5 mt-15">
+      <Button type="submit" intent="accent" className="mb-5 mt-5">
         Войти
       </Button>
       <Button onClick={handleNavigate}>Зарегистрироваться</Button>

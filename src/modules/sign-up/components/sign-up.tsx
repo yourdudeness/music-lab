@@ -23,7 +23,7 @@ export const SignUpForm = () => {
     formState: { errors } //errors for errors text, isSubmiting for loading form
   } = useForm<SignUpFormData>({
     shouldUseNativeValidation: true,
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema) as any
   });
 
   const signUpMutation = useSignUp({
@@ -35,6 +35,12 @@ export const SignUpForm = () => {
         setError("root", {
           type: "manual",
           message: "Такой пользователь уже существует"
+        });
+      }
+      if (error.response?.status === 500) {
+        setError("root", {
+          type: "manual",
+          message: "Ошибка попробуйте еще раз"
         });
       }
     }
@@ -59,19 +65,17 @@ export const SignUpForm = () => {
         />
         <Input
           placeholder="Пароль"
-          className="mt-7"
           {...register("password")}
           type="password"
           errorMessage={errors.password?.message}
         />
         <Input
           placeholder="Повторите пароль"
-          className="mt-7"
           {...register("confirmPassword")}
           type="password"
           errorMessage={errors.confirmPassword?.message}
         />
-        <Button type="submit" intent="accent" className="mb-5 mt-15">
+        <Button type="submit" intent="accent" className="mb-5 mt-5">
           Зарегистрироваться
         </Button>
 

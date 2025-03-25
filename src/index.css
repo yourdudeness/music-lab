@@ -28,6 +28,7 @@
   --40px: 2.5rem;
   --48px: 3rem;
   --52px: 3.25rem;
+  --80px: 5rem;
   --278px: 17.375rem;
   --366px: 22.875;
 
@@ -51,6 +52,7 @@
   --size-8: var(--366px);
   --size-1: var(--40px);
   --size-2: var(--52px);
+  --size-3: var(--80px);
 
   --text-color: #d0cece;
 
