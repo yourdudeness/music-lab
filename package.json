@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "types": "tsc --noEmit",
     "preview": "vite preview",
     "prepare": "husky",
-    "test:integration": "playwright test"
+    "test:integration": "playwright test",
+    "format": "prettier --write  './src/**/*.{ts,tsx,js,css,json,md}'"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
