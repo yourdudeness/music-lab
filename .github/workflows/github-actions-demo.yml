@@ -16,7 +16,7 @@ jobs:
       - name: Install modules
         run: npm install
       - name: install playwright
-        run: npx install playwright
+        run: npm install playwright
       - name: build project
         run: npm run build
       - name: lint code
