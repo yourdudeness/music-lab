@@ -15,6 +15,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install modules
         run: npm install
+      - name: install playwright
+        run: npx install playwright
       - name: build project
         run: npm run build
       - name: lint code
