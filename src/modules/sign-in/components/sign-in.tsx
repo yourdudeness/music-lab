@@ -14,7 +14,7 @@ export const SignInForm = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting } //errors for errors text, isSubmiting for loading form
+    formState: { errors }
   } = useForm<SignInParams>({
     shouldUseNativeValidation: true,
     resolver: yupResolver(schema)

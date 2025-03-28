@@ -3,7 +3,7 @@ import { signUp } from "../api/user";
 
 type Props = {
   onSuccess?: () => void;
-  onError?: (error: any) => void; // fix any
+  onError?: (error: any) => void; // TODO: fix any
 };
 
 export const useSignUp = ({ onSuccess, onError }: Props) => {

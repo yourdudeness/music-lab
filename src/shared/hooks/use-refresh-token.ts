@@ -3,7 +3,7 @@ import { refreshToken, RefreshTokenData } from "../api/user/refresh-token";
 
 type Props = {
   onSuccess?: (data: RefreshTokenData) => void;
-  onError?: (error: any) => void; //error any need to be fixed
+  onError?: (error: any) => void; //TODO: fix any
 };
 
 export const useRefreshToken = ({ onSuccess, onError }: Props) => {

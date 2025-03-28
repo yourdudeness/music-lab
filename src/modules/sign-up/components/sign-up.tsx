@@ -20,10 +20,10 @@ export const SignUpForm = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors } //errors for errors text, isSubmiting for loading form
+    formState: { errors }
   } = useForm<SignUpFormData>({
     shouldUseNativeValidation: true,
-    resolver: yupResolver(schema) as any
+    resolver: yupResolver(schema) as any //TODO: fix any
   });
 
   const signUpMutation = useSignUp({
