@@ -1,0 +1,21 @@
+.root {
+  --_form-wrap: var(--size-8);
+  --_form-radius: var(--radius-2);
+  --_form-bg: var(--white-1);
+  --_form-width: var(--size-7);
+
+  inline-size: var(--_form-wrap);
+  border-radius: var(--_form-radius);
+  background-color: var(--_form-bg);
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--32px) var(--40px) var(--48px) var(--40px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--_form-width);
+}

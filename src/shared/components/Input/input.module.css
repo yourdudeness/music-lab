@@ -1,0 +1,26 @@
+.root {
+  --_input-width: var(--size-7);
+  --_input-height: var(--size-1);
+  --_input-bg: var(--white-1);
+  --_input-border-color: var(--border-color);
+  --_input-color: var(--black-1);
+  --_input-placeholder-color: var(--text-color);
+  --_input-padding: --padding-1;
+
+  inline-size: var(--_input-width);
+  block-size: var(--_input-height);
+  background-color: var(--_input-bg);
+  color: var(--_input-color);
+  outline: none;
+  border-bottom: 1px solid var(--_input-border-color);
+  padding-block-start: var(--_input-padding);
+  padding-block-end: var(--_input-padding);
+
+  &::placeholder {
+    color: var(--_input-placeholder-color);
+  }
+}
+.wrapper {
+  position: relative;
+  block-size: var(--size-3);
+}

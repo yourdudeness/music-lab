@@ -5,12 +5,13 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import eslintConfigPrettier from "eslint-config-prettier";
 import onlyWarn from "eslint-plugin-only-warn";
-import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
+import unusedImports from 'eslint-plugin-unused-imports'
 
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, eslintConfigPrettier,eslintPluginPrettier, ...tseslint.configs.recommended],
+    extends: [js.configs.recommended, eslintConfigPrettier, eslintPluginPrettier, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -19,6 +20,7 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'unused-imports': unusedImports,
       onlyWarn,
     },
     rules: {
@@ -26,6 +28,16 @@ export default tseslint.config(
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
+      ],
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
       ],
     },
   },

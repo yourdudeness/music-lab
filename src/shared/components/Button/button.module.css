@@ -1,0 +1,43 @@
+.root {
+  --_button-width: var(--size-7);
+  --_button-height: var(--size-2);
+  --_button-color: var(--black-1);
+  --_button-bg: var(--white-1);
+  --_button-border-color: var(--border-color);
+  --_button-radius: var(--radius-1);
+
+  inline-size: var(--_button-width);
+  block-size: var(--_button-height);
+  background-color: var(--_button-bg);
+  border: 1px solid var(--_button-border-color);
+  border-radius: var(--_button-radius);
+  color: var(--_button-color);
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    --_button-bg: var(--gray-1);
+  }
+
+  &:active {
+    --_button-bg: var(--gray-2);
+  }
+
+  &[data-intent="accent"] {
+    --_button-color: var(--white-1);
+    --_button-bg: var(--violet-1);
+    --_button-border-color: var(--violet-1);
+
+    &:hover {
+      --_button-bg: var(--violet-2);
+      --_button-border-color: var(--violet-2);
+    }
+
+    &:active {
+      --_button-bg: var(--violet-3);
+      --_button-border-color: var(--violet-3);
+    }
+  }
+}
