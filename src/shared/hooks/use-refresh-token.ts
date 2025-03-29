@@ -11,11 +11,9 @@ export const useRefreshToken = ({ onSuccess, onError }: Props) => {
     mutationKey: ["refreshToken"],
     mutationFn: refreshToken,
     onSuccess: (data) => {
-      console.log(data, "data");
       onSuccess?.(data);
     },
     onError: (error) => {
-      console.log(error, "error");
       onError?.(error);
     }
   });

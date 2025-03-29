@@ -17,7 +17,6 @@ export const useSignIn = ({ onError }: Props) => {
     mutationKey: ["auth"],
     mutationFn: signIn,
     onError: (error) => {
-      console.log(error, "error");
       onError?.(error);
     }
   });

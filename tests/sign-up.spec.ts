@@ -29,12 +29,13 @@ test.describe("Sign Up", () => {
       await page.locator('input[name="password"]').fill("test");
       await page.locator('input[name="confirmPassword"]').fill("test");
       await page.getByRole("button", { name: "Зарегистрироваться" }).click();
+
       await expect(
         page.getByText("Такой пользователь уже существует")
       ).toBeVisible();
     });
 
-    test("Реквест при регистрации упал с ошибкой", async ({ page }) => {
+    test("Реквест при регистрации упал с ошибкой 500", async ({ page }) => {
       await page.route(
         `${process.env.VITE_API_URL}/auth/register`,
         async (route) => {
@@ -46,6 +47,7 @@ test.describe("Sign Up", () => {
           await route.fulfill({ status: 500, json });
         }
       );
+
       await page.getByPlaceholder("Логин").fill("test@test.com");
       await page.locator('input[name="password"]').fill("test");
       await page.locator('input[name="confirmPassword"]').fill("test");
@@ -72,31 +74,14 @@ test.describe("Sign Up", () => {
 
       await expect(page).toHaveURL("/sign-in");
 
-      await page.route(
-        `${process.env.VITE_API_URL}/users/me`,
-        async (route) => {
-          await route.fulfill({
-            status: 404,
-            json: {
-              message: "User does not exist",
-              errorCode: "USER_DOES_NOT_EXIST",
-              statusCode: 404
-            }
-          });
-        }
-      );
-      await page.getByPlaceholder("Логин").fill("test@mail.ru");
-      await page.getByPlaceholder("Пароль").fill("1234");
-      await page.getByRole("button", { name: "Войти" }).click();
-
-      await expect(page.getByText("Неверный логин или пароль")).toBeVisible();
+    
     });
 
     test.describe("Валидация формы", () => {
       test("Если пользователь не заполнил поле Логин", async ({ page }) => {
-        await page.getByPlaceholder("Пароль").fill("1234");
+        await page.locator('input[name="password"]').fill("1234");
 
-        await page.getByRole("button", { name: "Войти" }).click();
+        await page.getByRole("button", { name: "Зарегистрироваться" }).click();
 
         await expect(page.getByText("Email обязательное поле")).toBeVisible();
       });
@@ -104,15 +89,13 @@ test.describe("Sign Up", () => {
       test("Если пользователь не заполнил поле Пароль", async ({ page }) => {
         await page.getByPlaceholder("Логин").fill("test@test.ru");
 
-        await page.getByRole("button", { name: "Войти" }).click();
+        await page.getByRole("button", { name: "Зарегистрироваться" }).click();
 
         await expect(
           page.getByText("Минимальная длина пароля 4 символа")
         ).toBeVisible();
       });
-    });
 
-    test.describe("Валидация формы", () => {
       test("Если поле Логин пустое, необходимо показывать ошибку", async ({
         page
       }) => {
@@ -121,7 +104,7 @@ test.describe("Sign Up", () => {
 
         await page.getByRole("button", { name: "Зарегистрироваться" }).click();
 
-        await expect(page.getByText("Email обязателен")).toBeVisible();
+        await expect(page.getByText("Email обязательное поле")).toBeVisible();
       });
 
       test("Если поле - Пароль пустое", async ({ page }) => {

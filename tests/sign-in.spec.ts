@@ -12,6 +12,7 @@ test.describe("Sign in", () => {
 
     test("Переход на страницу регистрации", async ({ page }) => {
       await page.getByRole("button", { name: "Зарегистрироваться" }).click();
+
       await expect(page).toHaveURL("/sign-up");
     });
 
@@ -30,9 +31,20 @@ test.describe("Sign in", () => {
           });
         }
       );
+      await page.route(
+        `${process.env.VITE_API_URL}/users/me`,
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            json: currentUser200
+          });
+        }
+      );
+
       await page.getByPlaceholder("Логин").fill("test@test.com");
       await page.getByPlaceholder("Пароль").fill("test");
       await page.getByRole("button", { name: "Войти" }).click();
+
       await expect(page).toHaveURL("/");
     });
 
@@ -50,6 +62,7 @@ test.describe("Sign in", () => {
           });
         }
       );
+
       await page.getByPlaceholder("Логин").fill("test@mail.ru");
       await page.getByPlaceholder("Пароль").fill("1234");
       await page.getByRole("button", { name: "Войти" }).click();
@@ -60,7 +73,6 @@ test.describe("Sign in", () => {
     test.describe("Валидация формы", () => {
       test("Если пользователь не заполнил поле Логин", async ({ page }) => {
         await page.getByPlaceholder("Пароль").fill("1234");
-
         await page.getByRole("button", { name: "Войти" }).click();
 
         await expect(page.getByText("Email обязательное поле")).toBeVisible();
@@ -68,7 +80,6 @@ test.describe("Sign in", () => {
 
       test("Если пользователь не заполнил поле Пароль", async ({ page }) => {
         await page.getByPlaceholder("Логин").fill("test@test.ru");
-
         await page.getByRole("button", { name: "Войти" }).click();
 
         await expect(
