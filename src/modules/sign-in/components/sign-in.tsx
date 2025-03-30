@@ -4,7 +4,7 @@ import { Input } from "../../../shared/components/Input";
 import { Button } from "../../../shared/components/Button";
 import { useSignIn } from "../hooks/use-sign-in";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { SignInParams } from "../api/user";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
