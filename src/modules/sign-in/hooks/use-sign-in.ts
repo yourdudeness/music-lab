@@ -6,7 +6,7 @@ import { useAuth } from "../../../contexts/use-auth";
 
 type Props = {
   onSuccess?: (data: SignInData) => void;
-  onError?: (error: any) => void; //error any need to be fixed
+  onError?: (error: any) => void; //TODO: fix any
 };
 
 export const useSignIn = ({ onError }: Props) => {
