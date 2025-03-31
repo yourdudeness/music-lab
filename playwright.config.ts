@@ -75,8 +75,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm run test:integration",
-    url: "http://localhost:5173",
+    command: "npm run dev",
+    // url: "http://localhost:4173",
     port: process.env.PORT ? Number(process.env.PORT) : undefined,
     reuseExistingServer: !process.env.CI
   }
