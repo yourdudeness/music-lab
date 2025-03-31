@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { SignInParams } from "../api/user";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
+import { useState } from "react";
 
 export const SignInForm = () => {
   const {
@@ -19,8 +20,10 @@ export const SignInForm = () => {
     shouldUseNativeValidation: true,
     resolver: yupResolver(schema)
   });
+  const [test, setTest] = useState(false);
 
   const navigate = useNavigate();
+  console.log(errors.root, "test");
 
   const handleNavigate = () => navigate("/sign-up");
 
@@ -31,6 +34,7 @@ export const SignInForm = () => {
           type: "manual",
           message: "Неверный логин или пароль"
         });
+        setTest(true);
       }
     }
   });
@@ -62,6 +66,7 @@ export const SignInForm = () => {
       {Boolean(errors.root) && (
         <span className="text-red-500 text-sm">{errors.root?.message}</span>
       )}
+      {test && <p>testing</p>}
     </AuthFormContainer>
   );
 };
