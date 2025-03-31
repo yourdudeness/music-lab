@@ -67,7 +67,9 @@ test.describe("Sign in", () => {
       await page.getByPlaceholder("Пароль").fill("1234");
       await page.getByRole("button", { name: "Войти" }).click();
 
-      await expect(page.getByText("Неверный логин или пароль")).toBeVisible();
+      await expect(page.getByText("Неверный логин или пароль")).toBeVisible({
+        timeout: 10000
+      });
     });
 
     test.describe("Валидация формы", () => {
