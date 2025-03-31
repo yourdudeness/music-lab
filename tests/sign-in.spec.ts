@@ -51,7 +51,7 @@ test.describe("Sign in", () => {
 
     test("Несуществующий аккаунт", async ({ page }) => {
       await page.route(
-        `${process.env.VITE_API_URL}/api/auth/login`,
+        `${process.env.VITE_API_URL}/auth/login`,
         async (route) => {
           await route.fulfill({
             status: 400,
@@ -63,11 +63,11 @@ test.describe("Sign in", () => {
         }
       );
 
-      await page.locator('input[name="email"]').fill("test@mail.ru");
+      await page.locator("Логин").fill("test@mail.ru");
       await page.getByPlaceholder("Пароль").fill("1234");
       await page.getByRole("button", { name: "Войти" }).click();
 
-      await expect(page.getByText("testing")).toBeVisible();
+      await expect(page.getByText("Неверный логин или пароль")).toBeVisible();
     });
 
     // test.describe("Валидация формы", () => {
