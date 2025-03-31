@@ -35,7 +35,8 @@ test.describe("Sign in", () => {
       await page.getByPlaceholder("Логин").fill("test@test.com");
       await page.getByPlaceholder("Пароль").fill("test");
       await page.getByRole("button", { name: "Войти" }).click();
-      await page.route( //если вызывать перед тем как кликнуть на кнопку, будет баг с заполнением поля
+      await page.route(
+        //если вызывать перед тем как кликнуть на кнопку, будет баг с заполнением поля
         `${process.env.VITE_API_URL}/users/me`,
         async (route) => {
           await route.fulfill({
@@ -50,14 +51,13 @@ test.describe("Sign in", () => {
 
     test("Несуществующий аккаунт", async ({ page }) => {
       await page.route(
-        `${process.env.VITE_API_URL}/users/me`,
+        `${process.env.VITE_API_URL}/api/auth/login`,
         async (route) => {
           await route.fulfill({
-            status: 404,
+            status: 400,
             json: {
-              message: "User does not exist",
-              errorCode: "USER_DOES_NOT_EXIST",
-              statusCode: 404
+              message: "Invalid email or password",
+              errorCode: "INVALID_CREDENTIALS"
             }
           });
         }
