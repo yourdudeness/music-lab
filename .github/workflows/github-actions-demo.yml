@@ -26,4 +26,4 @@ jobs:
       - name: formattier
         run: npm run format
       - name: test integration
-        run: npm run test:integration
+        run: npm run test:integration --debug
