@@ -63,7 +63,7 @@ test.describe("Sign in", () => {
         }
       );
 
-      await page.locator("Логин").fill("test@mail.ru");
+      await page.getByPlaceholder("Логин").fill("test@mail.ru");
       await page.getByPlaceholder("Пароль").fill("1234");
       await page.getByRole("button", { name: "Войти" }).click();
 
