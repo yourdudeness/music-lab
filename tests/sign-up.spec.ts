@@ -69,12 +69,9 @@ test.describe("Sign Up", () => {
       await page.getByPlaceholder("Логин").fill("test@test.com");
       await page.locator('input[name="password"]').fill("test");
       await page.locator('input[name="confirmPassword"]').fill("test");
-
       await page.getByRole("button", { name: "Зарегистрироваться" }).click();
 
       await expect(page).toHaveURL("/sign-in");
-
-    
     });
 
     test.describe("Валидация формы", () => {
@@ -129,27 +126,6 @@ test.describe("Sign Up", () => {
         await expect(page.getByText("Пароли должны совпадать")).toBeVisible();
       });
     });
-
-    //     test.beforeEach(async ({ page }) => {
-    //       await page.route(
-    //         `${process.env.VITE_API_URL}/users/me`,
-    //         async (route) => {
-    //           await route.fulfill({
-    //             status: 200,
-    //             json: currentUser200
-    //           });
-    //         }
-    //       );
-    //     });
-
-    //     test("Авторизованный пользователь вызывает страницу sign-in", async ({
-    //       page
-    //     }) => {
-    //       await page.goto(`/sign-in`);
-
-    //       await expect(page).toHaveURL("/");
-    //     });
-    //   });
   });
 
   test.describe("Авторизованный пользователь", () => {
