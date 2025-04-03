@@ -6,6 +6,9 @@
 
 @theme {
   --font-roboto: Roboto, "sans-serif";
+  --color-black-theme: #181818;
+  --sidebar-bg-whte: #f6f5f3;
+  --color-white-theme: #ffffff;
 }
 
 :root {
