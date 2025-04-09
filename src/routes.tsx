@@ -5,6 +5,7 @@ import { SignInPage } from "./pages/sign-in";
 import { SignUpPage } from "./pages/sign-up";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { RequireAuth } from "./shared/components/require-auth/require-auth";
+import { Sidebar } from "./modules/sidebar/components/Sidebar";
 
 export const AppRoutes = () => {
   return (
@@ -24,6 +25,7 @@ export const AppRoutes = () => {
         element={
           <AuthProvider>
             <RequireAuth>
+              <Sidebar />
               <Outlet />
             </RequireAuth>
           </AuthProvider>
