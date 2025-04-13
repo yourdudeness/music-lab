@@ -5,6 +5,7 @@ type AuthContextType = {
   user: UserData | null;
   signIn: (callback: VoidFunction) => void;
   loading: boolean;
+  signOut: (callback?: VoidFunction) => void;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
