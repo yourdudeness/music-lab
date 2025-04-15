@@ -1,22 +1,18 @@
-import React, { useState } from "react";
-import { TracksData } from "../api/get-tracks";
+import { useState } from "react";
 import { useTracksList } from "../hooks/use-get-tracks";
 
 export const TrackList = () => {
-  const [tracks, setTracks] = useState<TracksData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const trackList = useTracksList({
-    onSuccess: (data) => {
-      setTracks(data);
+    onSuccess: () => {
       setLoading(false);
     },
     onError() {
-      setTracks(null);
       setLoading(false);
     }
   });
 
-  console.log("trackList", tracks);
+  console.log("trackList", trackList.data, loading);
   return <div>track-list</div>;
 };

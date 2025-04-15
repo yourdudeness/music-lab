@@ -4,7 +4,7 @@ export type Track = {
   _id: string;
   name: string;
   author: string;
-  releaseDate: string; // TODO - use Date??
+  releaseDate: string;
   genre: string;
   durationInSeconds: number;
   album: string;
