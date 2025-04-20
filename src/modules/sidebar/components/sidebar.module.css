@@ -13,6 +13,7 @@
   }
 
   li {
+    width: fit-content;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
     &:hover {

@@ -1,10 +1,9 @@
-import { Sidebar } from "../../modules/sidebar/components/Sidebar";
+import { TrackList } from "../../modules/all-tracks/components/track-list";
 
 export const Main = () => {
   return (
     <div className="flex">
-      <Sidebar />
-      <div>Home page</div>
+      <TrackList />
     </div>
   );
 };

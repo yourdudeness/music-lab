@@ -3,9 +3,16 @@ import { Logo } from "../../../shared/components/Logo/Logo";
 import { Link } from "react-router";
 import styles from "./sidebar.module.css";
 import clsx from "clsx";
+import { useAuth } from "../../../contexts/use-auth";
 
 export const Sidebar = () => {
   const [open, setOpen] = useState<boolean>(false);
+
+  const { signOut } = useAuth();
+
+  const handleSignOut = () => {
+    signOut();
+  };
 
   return (
     <div className={`w-71 h-screen bg-black-theme pt-6 pl-8`}>
@@ -50,7 +57,7 @@ export const Sidebar = () => {
               <Link to="/my-tracks">Мои треки</Link>
             </li>
             <li className="mb-6">
-              <a href="#">Выйти</a>
+              <button onClick={handleSignOut}>Выйти</button>
             </li>
             <li>
               <button className={styles["handle-color"]}>

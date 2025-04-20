@@ -68,6 +68,12 @@ a {
   text-decoration: inherit;
 }
 
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
 body {
   margin: 0;
   display: flex;
