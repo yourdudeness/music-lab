@@ -3,7 +3,7 @@ import { Sidebar } from "../modules/sidebar/components/Sidebar";
 
 export const BaseLayout: React.FC = () => {
   return (
-    <div>
+    <div className="flex">
       <Sidebar />
       <Outlet />
     </div>

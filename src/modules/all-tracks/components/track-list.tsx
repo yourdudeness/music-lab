@@ -1,18 +1,14 @@
-import { useState } from "react";
-import { useTracksList } from "../hooks/use-get-tracks";
+import clsx from "clsx";
+import { TrackListBody } from "./track-list-body/track-list-body";
+import { HeaderTrackList } from "./track-list-header/track-list-header";
+
+import styles from "./track-list.module.css";
 
 export const TrackList = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const trackList = useTracksList({
-    onSuccess: () => {
-      setLoading(false);
-    },
-    onError() {
-      setLoading(false);
-    }
-  });
-
-  console.log("trackList", trackList.data, loading);
-  return <div>track-list</div>;
+  return (
+    <div className={clsx(styles.root, "overflow-auto")}>
+      <HeaderTrackList />
+      <TrackListBody />
+    </div>
+  );
 };
