@@ -19,7 +19,11 @@ export const TrackItem = ({
   useEffect(() => {
     if (durationInSeconds) {
       const minutes = Math.floor(durationInSeconds / 60);
-      const seconds = durationInSeconds % 60;
+      let seconds = String(durationInSeconds % 60);
+
+      if (Number(seconds) < 10) {
+        seconds = `0${seconds}`;
+      }
       setDuration(() => {
         return `${minutes}:${seconds}`;
       });
@@ -27,8 +31,8 @@ export const TrackItem = ({
   }, []);
 
   return (
-    <div className={styles.root}>
-      <div className={clsx(styles.root__item, styles.track)}>
+    <div className={styles["track-item"]}>
+      <div className={clsx(styles.track__content, styles.track)}>
         <div className={styles.track__icon}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,9 +51,9 @@ export const TrackItem = ({
         </div>
         <span className="ms-3">{name}</span>
       </div>
-      <div className={clsx(styles.root__item, "author")}>{author}</div>
-      <div className={clsx(styles.root__item, "album")}>{album}</div>
-      <div className={clsx(styles.root__item, "duration")}>{duration}</div>
+      <div className={clsx(styles.track__content, "author")}>{author}</div>
+      <div className={clsx(styles.track__content, "album")}>{album}</div>
+      <div className={clsx(styles.track__content, "duration")}>{duration}</div>
     </div>
   );
 };

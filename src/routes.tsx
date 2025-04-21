@@ -6,6 +6,7 @@ import { SignUpPage } from "./pages/sign-up";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { RequireAuth } from "./shared/components/require-auth/require-auth";
 import { BaseLayout } from "./layouts/base-layout";
+import { MyTracks } from "./pages/my-tracks";
 
 export const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ export const AppRoutes = () => {
         }
       >
         <Route path="/" element={<Main />} />
+        <Route path="/my-tracks" element={<MyTracks />} />
       </Route>
     </Routes>
   );

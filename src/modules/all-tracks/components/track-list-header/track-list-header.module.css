@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-gap: 16px;
+  grid-gap: var(--32px);
   color: var(--gray-3);
   grid-template-columns:
     [index] minmax(16.8rem, 3fr) [first] minmax(17.5rem, 4fr)

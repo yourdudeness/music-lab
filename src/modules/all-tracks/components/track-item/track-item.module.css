@@ -1,17 +1,18 @@
-.root {
+.track-item {
   display: grid;
   grid-template-columns:
     [index] minmax(16.8rem, 3fr) [first] minmax(17.5rem, 4fr)
     [var1] minmax(11.2rem, var(--col2, 2fr)) [last] minmax(7.5rem, 1fr);
 
   margin-bottom: var(--12px);
+  grid-gap: var(--32px);
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
-.root__item {
+.track__content {
   display: flex;
   align-items: center;
 }
