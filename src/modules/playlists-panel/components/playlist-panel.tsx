@@ -3,8 +3,8 @@ import { usePlaylists } from "../hooks/use-get-playlists";
 export const PlaylistPanel = () => {
   const playlistLists = usePlaylists();
 
-  console.log(playlistLists.data);
+  console.log(playlistLists.data, "playlist");
   return (
-    <div className={`w-71 h-screen bg-black-theme pt-6 pl-8`}>playlist</div>
+    <div className={`max-w-xs w-full h-screen bg-black-theme`}>playlist</div>
   );
 };

@@ -6,7 +6,7 @@ import styles from "./track-list.module.css";
 
 export const TrackList = () => {
   return (
-    <div className={clsx(styles.root, "overflow-auto")}>
+    <div className={clsx(styles.root, "max-w-7xl w-full overflow-auto")}>
       <HeaderTrackList />
       <TrackListBody />
     </div>

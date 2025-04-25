@@ -15,7 +15,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className={`w-71 h-screen bg-black-theme pt-6 pl-8`}>
+    <div className={`max-w-2xs w-full h-screen bg-black-theme pt-6 pl-8`}>
       <div className={clsx(styles.root)}>
         <div className="logo">
           <Link to="/">

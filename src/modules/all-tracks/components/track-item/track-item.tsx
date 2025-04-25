@@ -51,9 +51,15 @@ export const TrackItem = ({
         </div>
         <span className="ms-3">{name}</span>
       </div>
-      <div className={clsx(styles.track__content, "author")}>{author}</div>
-      <div className={clsx(styles.track__content, "album")}>{album}</div>
-      <div className={clsx(styles.track__content, "duration")}>{duration}</div>
+      <div className={clsx(styles.track__content, "author")}>
+        <span className={styles.track__text}>{author}</span>
+      </div>
+      <div className={clsx(styles.track__content, "album")}>
+        <span className={styles.track__text}>{album}</span>
+      </div>
+      <div className={clsx(styles.track__content, "duration")}>
+        <span className={styles.track__text}>{duration}</span>
+      </div>
     </div>
   );
 };
