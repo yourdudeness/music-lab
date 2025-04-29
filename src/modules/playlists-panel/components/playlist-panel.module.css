@@ -1,0 +1,20 @@
+.playlist-item {
+  max-width: var(--250px);
+  width: 100%;
+  height: var(--150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #271a58 0%, #7868cc 100%);
+}
+
+.btn-sign-out {
+  color: white;
+  width: var(--40px);
+  height: var(--40px);
+  border-radius: 50%;
+  border: 1px solid var(--white-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
