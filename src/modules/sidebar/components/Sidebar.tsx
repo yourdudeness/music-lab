@@ -15,7 +15,12 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className={`max-w-2xs w-full h-screen bg-black-theme pt-6 pl-8`}>
+    <div
+      className={clsx(
+        "max-w-2xs w-full h-screen pt-6 pl-8 transition-[background-color] duration-300",
+        open && "bg-(--black-3)"
+      )}
+    >
       <div className={clsx(styles.root)}>
         <div className="logo">
           <Link to="/">

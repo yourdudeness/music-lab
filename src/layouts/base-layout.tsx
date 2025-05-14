@@ -4,7 +4,7 @@ import { PlaylistPanel } from "../modules/playlists-panel/components/playlist-pa
 
 export const BaseLayout: React.FC = () => {
   return (
-    <div className="flex">
+    <div className="flex justify-between">
       <Sidebar />
       <Outlet />
       <PlaylistPanel />
