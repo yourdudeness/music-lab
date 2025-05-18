@@ -32,6 +32,7 @@
   --40px: 2.5rem;
   --48px: 3rem;
   --52px: 3.25rem;
+  --60px: 3.75rem;
   --80px: 5rem;
   --150px: 9.375rem;
   --250px: 15.625rem;
@@ -52,6 +53,7 @@
   --gray-1: #f4f5f6;
   --gray-2: #d9d9d9;
   --gray-3: #4e4e4e;
+  --gray-4: rgba(78, 78, 78, 1);
 
   --border-color: #d0cece;
 
