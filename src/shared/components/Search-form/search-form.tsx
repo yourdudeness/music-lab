@@ -1,18 +1,14 @@
 import clsx from "clsx";
 import styles from "./search-form.module.css";
-import { useState } from "react";
-import { useTracks } from "./hooks/use-get-search-tracks";
+import { useTracksFilter } from "./hooks/use-tracks-filter";
 
 export const SearchForm = () => {
-  const [value, setValue] = useState<string>("");
-
-  const tracks = useTracks(value);
+  const { setFilters, search } = useTracksFilter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setFilters({ search: e.target.value });
   };
 
-  console.log(tracks.data, "test");
   return (
     <form className="flex items-center w-full">
       <div className={styles["input-wrapper"]}>
@@ -35,7 +31,7 @@ export const SearchForm = () => {
           type="text"
           placeholder="Поиск"
           className={styles.input}
-          value={value}
+          value={search}
           onChange={handleChange}
         />
       </div>
