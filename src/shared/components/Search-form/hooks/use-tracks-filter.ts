@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 export function useTracksFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const search = searchParams.get("search") || "";
+  const searchQuery = searchParams.get("search") || "";
 
   const setFilters = useCallback((filters: { search?: string }) => {
     setSearchParams((params) => {
@@ -17,7 +17,7 @@ export function useTracksFilter() {
   }, []);
 
   return {
-    search,
+    searchQuery,
     setFilters
   };
 }

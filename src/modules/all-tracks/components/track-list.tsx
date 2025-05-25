@@ -6,20 +6,24 @@ import styles from "./track-list.module.css";
 import { useTracksList } from "../hooks/use-get-tracks";
 import { useTracksFilter } from "../../../shared/components/Search-form/hooks/use-tracks-filter";
 import { useTracks } from "../../../shared/components/Search-form/hooks/use-get-search-tracks";
+import { TrackFilter } from "./track-filter/track-filter";
 
 export const TrackList = () => {
   const trackList = useTracksList();
-  const { search } = useTracksFilter();
-  const filteredTracks = useTracks(search);
+  const { searchQuery } = useTracksFilter();
+  const filteredTracks = useTracks(searchQuery);
 
   return (
-    <div className={clsx(styles.root, "max-w-7xl w-full overflow-auto")}>
-      <HeaderTrackList />
-      <TrackListBody
-        trackLists={
-          filteredTracks.data ? filteredTracks.data : trackList.data || []
-        }
-      />
-    </div>
+    <>
+      <TrackFilter />
+      <div className={clsx(styles.root, "max-w-7xl w-full overflow-auto")}>
+        <HeaderTrackList />
+        <TrackListBody
+          trackLists={
+            filteredTracks.data ? filteredTracks.data : trackList.data || []
+          }
+        />
+      </div>
+    </>
   );
 };

@@ -3,7 +3,7 @@ import styles from "./search-form.module.css";
 import { useTracksFilter } from "./hooks/use-tracks-filter";
 
 export const SearchForm = () => {
-  const { setFilters, search } = useTracksFilter();
+  const { setFilters, searchQuery } = useTracksFilter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({ search: e.target.value });
@@ -31,7 +31,7 @@ export const SearchForm = () => {
           type="text"
           placeholder="Поиск"
           className={styles.input}
-          value={search}
+          value={searchQuery}
           onChange={handleChange}
         />
       </div>
