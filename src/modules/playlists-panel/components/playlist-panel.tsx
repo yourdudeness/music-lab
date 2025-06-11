@@ -9,7 +9,7 @@ export const PlaylistPanel = () => {
   return (
     <div
       className={clsx(
-        `max-w-xs w-full bg-black-theme pr-22 flex flex-col justify-center`,
+        `max-w-xs w-full pr-22 flex flex-col justify-center`,
         styles["playlist-wrap"]
       )}
     >

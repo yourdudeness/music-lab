@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Logo } from "../../../shared/components/Logo/Logo";
 import { Link } from "react-router";
 import styles from "./sidebar.module.css";
 import clsx from "clsx";
 import { useAuth } from "../../../contexts/use-auth";
+import { useTheme } from "@/shared/components/ThemeContext/theme-context";
 
 export const Sidebar = () => {
   const [open, setOpen] = useState<boolean>(false);
+
+  const { toggleTheme } = useTheme();
 
   const { signOut } = useAuth();
 
@@ -65,7 +68,10 @@ export const Sidebar = () => {
             <button onClick={handleSignOut}>Выйти</button>
           </li>
           <li>
-            <button className={styles["handle-color"]}>
+            <button
+              className={styles["handle-color"]}
+              onClick={() => toggleTheme()}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
