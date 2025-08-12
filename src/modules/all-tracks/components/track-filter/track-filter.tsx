@@ -6,7 +6,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
+} from "@/shared/components/DropDownMenu/DropDownMenu";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 import { Button } from "@/shared/components/Button";
@@ -25,12 +25,8 @@ export const TrackFilter = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button>Open</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+      <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+      <DropdownMenuContent data-side="left">
         <DropdownMenuCheckboxItem
           checked={showStatusBar}
           onCheckedChange={setShowStatusBar}
