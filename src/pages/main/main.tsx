@@ -9,6 +9,7 @@ export const Main = () => {
     <>
       <div className={clsx("flex h-screen flex-col", styles.main)}>
         <SearchForm />
+        <h1 className="text-6xl mt-8">Треки</h1>
         <TrackList />
       </div>
       <PlaylistPanel />

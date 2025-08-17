@@ -5,6 +5,11 @@
   padding: var(--10px) var(--20px);
   font-size: var(--16px);
   line-height: var(--16px);
+
+  &:hover {
+    border-color: var(--violet-4);
+    color: var(--violet-4);
+  }
 }
 
 .drop-down-menu-content {
@@ -19,4 +24,14 @@
 }
 
 .menu-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    color: var(--violet-4);
+  }
+
+  &[data-state="checked"] {
+    color: var(--violet-4);
+  }
 }
