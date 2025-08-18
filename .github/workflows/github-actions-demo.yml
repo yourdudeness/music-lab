@@ -1,0 +1,55 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Lint-scripts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.14.0]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install modules
+        run: npm install
+      - name: lint code
+        run: npm run lint 
+      - name: typescript check
+        run: npm run types
+      - name: formattier
+        run: npm run format
+  Tests:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [22.14.0]
+      steps:
+        - uses: actions/checkout@v4
+        - name: Starting Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Install modules
+          run: npm install
+        - name: Install Playwright browsers
+          run: npx playwright install --with-deps
+        - name: test integration
+          run: npm run test:integration
+  Build-app:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.14.0]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install modules
+        run: npm install
+      - name: build project
+        run: npm run build

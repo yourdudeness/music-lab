@@ -1,0 +1,32 @@
+.root {
+  color: var(--white-1);
+
+  .handle-color {
+    width: var(--40px);
+    height: var(--40px);
+    border-radius: 50%;
+    border: 1px solid var(--white-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  li {
+    width: fit-content;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: var(--violet-0);
+    }
+  }
+}
+
+.trigger {
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: var(--violet-0);
+  }
+}

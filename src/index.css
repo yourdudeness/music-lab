@@ -6,6 +6,9 @@
 
 @theme {
   --font-roboto: Roboto, "sans-serif";
+  --color-black-theme: #181818;
+  --sidebar-bg-whte: #f6f5f3;
+  --color-white-theme: #ffffff;
 }
 
 :root {
@@ -32,6 +35,7 @@
   --278px: 17.375rem;
   --366px: 22.875;
 
+  --violet-0: #9a48f1;
   --violet-1: #580ea2;
   --violet-2: #3f007d;
   --violet-3: #271a58;
@@ -60,12 +64,14 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
+  font-weight: 400;
   text-decoration: inherit;
 }
-a:hover {
-  color: #535bf2;
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 body {
@@ -78,7 +84,7 @@ body {
 
 @media (prefers-color-scheme: light) {
   :root {
-    background-color: #ffffff;
+    background-color: var(--white-1);
   }
 }
 
