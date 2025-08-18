@@ -10,7 +10,7 @@ export const SearchForm = () => {
   };
 
   return (
-    <form className="flex items-center w-full">
+    <form className={clsx(styles.root, "flex items-center w-full")}>
       <div className={styles["input-wrapper"]}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

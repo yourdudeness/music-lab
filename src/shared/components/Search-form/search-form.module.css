@@ -1,3 +1,7 @@
+.root {
+  grid-area: 1 / 2 / 2 / 5;
+}
+
 .input-wrapper {
   display: flex;
   align-items: center;

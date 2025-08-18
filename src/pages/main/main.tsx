@@ -7,8 +7,7 @@ import { PlaylistPanel } from "../../modules/playlists-panel/components/playlist
 export const Main = () => {
   return (
     <>
-      <div className={clsx("flex h-screen flex-col", styles.main)}>
-        <SearchForm />
+      <div className={clsx("flex flex-col", styles.main)}>
         <h1 className="text-6xl mt-8">Треки</h1>
         <TrackList />
       </div>

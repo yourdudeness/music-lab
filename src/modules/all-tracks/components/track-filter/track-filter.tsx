@@ -97,6 +97,7 @@ export const TrackFilter = () => {
               <DropdownMenuCheckboxItem
                 checked={list.checked}
                 onCheckedChange={handleFilterChange(group.key, list.value)}
+                key={list.value}
               >
                 {list.value}
               </DropdownMenuCheckboxItem>

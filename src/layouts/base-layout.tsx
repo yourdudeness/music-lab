@@ -4,6 +4,7 @@ import { Button } from "../shared/components/Button";
 import { useAuth } from "../contexts/use-auth";
 import styles from "./base-layout.module.css";
 import clsx from "clsx";
+import { SearchForm } from "@/shared/components/Search-form/search-form";
 
 export const BaseLayout: React.FC = () => {
   const { signOut } = useAuth();
@@ -14,6 +15,7 @@ export const BaseLayout: React.FC = () => {
   return (
     <div className={clsx(styles.base)}>
       <Sidebar />
+      <SearchForm />
       <Button
         onClick={handleSignOut}
         intent="ghost"
