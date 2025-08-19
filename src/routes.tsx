@@ -7,7 +7,7 @@ import { AuthProvider } from "./contexts/AuthProvider";
 import { RequireAuth } from "./shared/components/require-auth/require-auth";
 import { BaseLayout } from "./layouts/base-layout";
 import { MyTracks } from "./pages/my-tracks";
-import { PlaylistsPage } from "./pages/playlists/playlists-page";
+import { PlaylistsPage } from "./pages/playlist/playlist-page";
 
 export const AppRoutes = () => {
   return (
