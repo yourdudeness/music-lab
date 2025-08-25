@@ -18,8 +18,6 @@ export const TrackItem = ({
 }: Props) => {
   const duration = formatDuration(durationInSeconds);
 
-  console.log(durationInSeconds, "asdfa");
-
   return (
     <div className={styles["track-item"]}>
       <div className={clsx(styles.track__content, styles.track)}>

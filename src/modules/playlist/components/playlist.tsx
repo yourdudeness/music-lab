@@ -13,7 +13,10 @@ const Playlist = () => {
     <>
       <h2 className="text-6xl mt-8 mb-8">{name}</h2>
       <HeaderTrackList />
-      <TrackListBody trackLists={playlistData.data?.tracks || []} />
+      <TrackListBody
+        trackLists={playlistData.data?.tracks || []}
+        isPending={playlistData.isLoading}
+      />
     </>
   );
 };

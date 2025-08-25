@@ -1,0 +1,40 @@
+.skeleton {
+  background-color: rgba(215, 214, 214, 0.11);
+  position: relative;
+  animation: blink 1000ms infinite alternate-reverse !important;
+  background-image: none !important;
+  background-clip: border-box !important;
+  border: none !important;
+  box-shadow: none !important;
+  box-decoration-break: clone !important;
+  color: transparent !important;
+  outline: none !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  cursor: default !important;
+  border-radius: var(--6px) !important;
+
+  & > *,
+  &::after,
+  &::before {
+    visibility: hidden !important;
+  }
+}
+
+.skeleton:where([data-skeleton-inline]) {
+  line-height: 0;
+
+  /* Font metrics on Arial yield much nicer height for the text background bounding box */
+  font-family: Arial, sans-serif;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}

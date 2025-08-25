@@ -22,6 +22,7 @@ export const TrackList = () => {
           trackLists={
             filteredTracks.data ? filteredTracks.data : trackList.data || []
           }
+          isPending={trackList.isLoading}
         />
       </div>
     </>
