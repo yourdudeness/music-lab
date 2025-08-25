@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import { TrackItem } from "../track-item/track-item";
-import styles from "./track-list-body.module.css";
 import { TracksData } from "../../api/get-tracks";
 
 type Props = {
@@ -9,7 +7,7 @@ type Props = {
 
 export const TrackListBody = ({ trackLists }: Props) => {
   return (
-    <div className={clsx(styles.root, "overflow-auto mt-6")}>
+    <div className="overflow-auto mt-6">
       {trackLists.map((track) => (
         <TrackItem
           key={track._id}

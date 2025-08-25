@@ -7,6 +7,8 @@ import { Link } from "react-router";
 export const PlaylistPanel = () => {
   const playlistLists = usePlaylists();
 
+  console.log("playlistLists", playlistLists.isLoading);
+
   return (
     <div
       className={clsx(
