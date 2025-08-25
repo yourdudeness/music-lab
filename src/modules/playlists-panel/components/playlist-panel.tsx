@@ -3,11 +3,18 @@ import { usePlaylists } from "../hooks/use-get-playlists";
 
 import styles from "./playlist-panel.module.css";
 import { Link } from "react-router";
+import { PlaylistPanelSkeleton } from "./playlist-panel-skeleton";
 
 export const PlaylistPanel = () => {
   const playlistLists = usePlaylists();
 
-  console.log("playlistLists", playlistLists.isLoading);
+  if (playlistLists.isLoading) {
+    return (
+      <div className="flex flex-col gap-5">
+        <PlaylistPanelSkeleton />;
+      </div>
+    );
+  }
 
   return (
     <div
@@ -20,13 +27,13 @@ export const PlaylistPanel = () => {
         {playlistLists.data?.map((playlist) => (
           <Link
             key={playlist._id}
-            className={clsx(styles["playlist-item"])}
+            className={styles["playlist-item"]}
             to={{
               pathname: `/playlists/${playlist._id}`,
               search: `?name=${encodeURIComponent(playlist.name)}`
             }}
           >
-            <div className="text-white text-2xl">{playlist.name}</div>
+            <span className="text-white text-2xl">{playlist.name}</span>
           </Link>
         ))}
       </div>
