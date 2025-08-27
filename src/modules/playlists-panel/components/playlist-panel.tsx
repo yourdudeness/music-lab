@@ -32,8 +32,11 @@ export const PlaylistPanel = () => {
               pathname: `/playlists/${playlist._id}`,
               search: `?name=${encodeURIComponent(playlist.name)}`
             }}
+            data-test-id="playlist-item"
           >
-            <span className="text-white text-2xl">{playlist.name}</span>
+            <span className="text-white text-2xl" data-test-id="playlist-name">
+              {playlist.name}
+            </span>
           </Link>
         ))}
       </div>

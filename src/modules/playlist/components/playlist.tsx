@@ -11,7 +11,9 @@ const Playlist = () => {
 
   return (
     <>
-      <h2 className="text-6xl mt-8 mb-8">{name}</h2>
+      <h2 className="text-6xl mt-8 mb-8" data-test-id="playlist-title">
+        {name}
+      </h2>
       <HeaderTrackList />
       <TrackListBody
         trackLists={playlistData.data?.tracks || []}

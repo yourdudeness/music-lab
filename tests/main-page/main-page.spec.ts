@@ -1,42 +1,17 @@
-import { expect, test } from "@playwright/test";
-
 import allTracks200 from "./mocks/all-tracks-200";
 import allPlaylists200 from "./mocks/all-playlists-200";
-import currentUser200 from "../mocks/current-user-200";
+import { expect, test } from "./fixture";
 
 test.describe("Пользователю показываются все треки и плейлисты", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.route(`${process.env.VITE_API_URL}/users/me`, async (route) => {
-      await route.fulfill({
-        status: 200,
-        json: currentUser200
-      });
-    });
-  });
-
-  test.beforeEach(async ({ page }) => {
-    await page.route(`${process.env.VITE_API_URL}/tracks`, async (route) => {
-      await route.fulfill({
-        status: 200,
-        json: allTracks200
-      });
-    });
-  });
-
-  test.beforeEach(async ({ page }) => {
-    await page.route(`${process.env.VITE_API_URL}/playlists`, async (route) => {
-      await route.fulfill({
-        status: 200,
-        json: allPlaylists200
-      });
-    });
-  });
-
   test("На главной странице отображаются треки и плейлисты", async ({
-    page
+    mockedPage: page
   }) => {
     await page.goto("/");
     await page.waitForSelector('[data-test-id="track-item"]', {
+      timeout: 5000
+    });
+
+    await page.waitForSelector('[data-test-id="playlist-item"]', {
       timeout: 5000
     });
 
@@ -44,26 +19,65 @@ test.describe("Пользователю показываются все трек
       allTracks200.length
     );
 
-    const firstTrack = page.locator('[data-test-id="track-item"]').first();
+    for (let i = 0; i < allTracks200.length; i++) {
+      const trackItem = page.locator('[data-test-id="track-item"]').nth(i);
 
-    await expect(
-      firstTrack.locator('[data-test-id="track-icon"]')
-    ).toBeVisible();
+      await expect(trackItem.locator('[data-test-id="track-name"]')).toHaveText(
+        allTracks200[i].name
+      );
 
-    await expect(firstTrack.locator('[data-test-id="track-name"]')).toHaveText(
-      allTracks200[0].name
+      await expect(
+        trackItem.locator('[data-test-id="track-icon"]')
+      ).toBeVisible();
+
+      await expect(
+        trackItem.locator('[data-test-id="track-author"]')
+      ).toHaveText(allTracks200[i].author);
+
+      await expect(
+        trackItem.locator('[data-test-id="track-album"]')
+      ).toHaveText(allTracks200[i].album);
+
+      await expect(
+        trackItem.locator('[data-test-id="track-duration"]')
+      ).toBeVisible();
+    }
+
+    await expect(page.locator("[data-test-id='playlist-item']")).toHaveCount(
+      allPlaylists200.length
+    );
+
+    for (let i = 0; i < allPlaylists200.length; i++) {
+      const playlistItem = page
+        .locator('[data-test-id="playlist-item"]')
+        .nth(i);
+
+      await expect(
+        playlistItem.locator('[data-test-id="playlist-name"]')
+      ).toHaveText(allPlaylists200[i].name);
+    }
+  });
+});
+
+test.describe("При клике на плейлист, пользователь преходит на страницу плейлиста", () => {
+  test("Переход на страницу плейлиста", async ({ mockedPage: page }) => {
+    await page.goto("/");
+    await page.waitForSelector('[data-test-id="playlist-item"]', {
+      timeout: 5000
+    });
+
+    const firstPlaylist = allPlaylists200[0];
+
+    await page.locator('[data-test-id="playlist-item"]').first().click();
+
+    await expect(page).toHaveURL(
+      new RegExp(
+        `/playlists/${firstPlaylist._id}\\?name=${encodeURIComponent(firstPlaylist.name)}`
+      )
     );
 
     await expect(
-      firstTrack.locator('[data-test-id="track-author"]')
-    ).toHaveText(allTracks200[0].author);
-
-    await expect(firstTrack.locator('[data-test-id="track-album"]')).toHaveText(
-      allTracks200[0].album
-    );
-
-    await expect(
-      firstTrack.locator('[data-test-id="track-duration"]')
-    ).toHaveText("2:21");
+      page.locator('[data-test-id="playlist-title"]').first()
+    ).toHaveText(firstPlaylist.name);
   });
 });
