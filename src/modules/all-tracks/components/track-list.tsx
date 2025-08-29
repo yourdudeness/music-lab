@@ -15,7 +15,7 @@ export const TrackList = () => {
 
   return (
     <>
-      <TrackFilter />
+      <TrackFilter filtersList={trackList.data || []} />
       <div className={clsx(styles.root, "max-w-7xl w-full overflow-auto")}>
         <HeaderTrackList />
         <TrackListBody

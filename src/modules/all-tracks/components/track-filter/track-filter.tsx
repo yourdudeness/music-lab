@@ -7,8 +7,10 @@ import {
 
 import styles from "./track-filter.module.css";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
+import { TracksData } from "../../api/get-tracks";
+import { set } from "react-hook-form";
 
 interface FilterItem {
   value: string;
@@ -23,45 +25,59 @@ interface FilterGroup {
   items: FilterItem[];
 }
 
-const initialFilterGroups: FilterGroup[] = [
-  {
-    title: "UI Elements",
-    key: "uiElements",
-    items: [
-      { value: "statusBar", label: "Status Bar", checked: true },
-      {
-        value: "activityBar",
-        label: "Activity Bar",
-        checked: false,
-        disabled: true
-      },
-      { value: "panel", label: "Panel", checked: false },
-      { value: "sidebar", label: "Sidebar", checked: true }
-    ]
-  },
-  {
-    title: "Flavors",
-    key: "flavors",
-    items: [
-      { value: "chocolate", label: "Chocolate", checked: false },
-      { value: "strawberry", label: "Strawberry", checked: true },
-      { value: "vanilla", label: "Vanilla", checked: false }
-    ]
-  },
-  {
-    title: "Categories",
-    key: "categories",
-    items: [
-      { value: "new", label: "New Items", checked: false },
-      { value: "popular", label: "Popular", checked: true },
-      { value: "featured", label: "Featured", checked: false }
-    ]
-  }
-];
+type Props = {
+  filtersList: TracksData;
+};
 
-export const TrackFilter = () => {
-  const [filterGroups, setFilterGroups] =
-    useState<FilterGroup[]>(initialFilterGroups);
+export const TrackFilter = ({ filtersList }: Props) => {
+  const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(() => {
+    if (!filtersList.length)
+      return [
+        { title: "Исполнителю", key: "authors", items: [] },
+        { title: "Году выпуска", key: "years", items: [] },
+        { title: "Жанру", key: "genres", items: [] }
+      ];
+
+    const uniqueValues = filtersList.reduce(
+      (acc, track) => {
+        acc.authors.add(track.author);
+        acc.genres.add(track.genre);
+        acc.years.add(new Date(track.releaseDate).getFullYear());
+        return acc;
+      },
+      { authors: new Set(), genres: new Set(), years: new Set() }
+    );
+
+    return [
+      {
+        title: "Исполнителю",
+        key: "authors",
+        items: [...uniqueValues.authors].map((item) => ({
+          value: String(item).trim().toLowerCase().replace(/\s+/g, "-"),
+          label: String(item),
+          checked: false
+        }))
+      },
+      {
+        title: "Жанру",
+        key: "genres",
+        items: [...uniqueValues.genres].map((item) => ({
+          value: String(item).trim().toLowerCase().replace(/\s+/g, "-"),
+          label: String(item),
+          checked: false
+        }))
+      },
+      {
+        title: "Году выпуска",
+        key: "years",
+        items: [...uniqueValues.years].map((item) => ({
+          value: String(item),
+          label: String(item),
+          checked: false
+        }))
+      }
+    ];
+  });
 
   const handleFilterChange =
     (groupKey: string, itemValue: string) => (checked: boolean) => {
