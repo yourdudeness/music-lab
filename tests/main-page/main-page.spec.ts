@@ -15,45 +15,45 @@ test.describe("Пользователю показываются все трек
       timeout: 5000
     });
 
-    await expect(page.locator("[data-test-id='track-item']")).toHaveCount(
+    await expect(page.getByTestId("[data-test-id='track-item']")).toHaveCount(
       allTracks200.length
     );
 
     for (let i = 0; i < allTracks200.length; i++) {
-      const trackItem = page.locator('[data-test-id="track-item"]').nth(i);
-
-      await expect(trackItem.locator('[data-test-id="track-name"]')).toHaveText(
-        allTracks200[i].name
-      );
+      const trackItem = page.getByTestId('[data-test-id="track-item"]').nth(i);
 
       await expect(
-        trackItem.locator('[data-test-id="track-icon"]')
+        trackItem.getByTestId('[data-test-id="track-name"]')
+      ).toHaveText(allTracks200[i].name);
+
+      await expect(
+        trackItem.getByTestId('[data-test-id="track-icon"]')
       ).toBeVisible();
 
       await expect(
-        trackItem.locator('[data-test-id="track-author"]')
+        trackItem.getByTestId('[data-test-id="track-author"]')
       ).toHaveText(allTracks200[i].author);
 
       await expect(
-        trackItem.locator('[data-test-id="track-album"]')
+        trackItem.getByTestId('[data-test-id="track-album"]')
       ).toHaveText(allTracks200[i].album);
 
       await expect(
-        trackItem.locator('[data-test-id="track-duration"]')
+        trackItem.getByTestId('[data-test-id="track-duration"]')
       ).toBeVisible();
     }
 
-    await expect(page.locator("[data-test-id='playlist-item']")).toHaveCount(
-      allPlaylists200.length
-    );
+    await expect(
+      page.getByTestId("[data-test-id='playlist-item']")
+    ).toHaveCount(allPlaylists200.length);
 
     for (let i = 0; i < allPlaylists200.length; i++) {
       const playlistItem = page
-        .locator('[data-test-id="playlist-item"]')
+        .getByTestId('[data-test-id="playlist-item"]')
         .nth(i);
 
       await expect(
-        playlistItem.locator('[data-test-id="playlist-name"]')
+        playlistItem.getByTestId('[data-test-id="playlist-name"]')
       ).toHaveText(allPlaylists200[i].name);
     }
   });
@@ -68,7 +68,7 @@ test.describe("При клике на плейлист, пользователь
 
     const firstPlaylist = allPlaylists200[0];
 
-    await page.locator('[data-test-id="playlist-item"]').first().click();
+    await page.getByTestId('[data-test-id="playlist-item"]').first().click();
 
     await expect(page).toHaveURL(
       new RegExp(
@@ -77,7 +77,7 @@ test.describe("При клике на плейлист, пользователь
     );
 
     await expect(
-      page.locator('[data-test-id="playlist-title"]').first()
+      page.getByTestId('[data-test-id="playlist-title"]').first()
     ).toHaveText(firstPlaylist.name);
   });
 });

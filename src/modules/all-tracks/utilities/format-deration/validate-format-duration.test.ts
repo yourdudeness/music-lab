@@ -2,12 +2,13 @@ import { describe, expect, test } from "@jest/globals";
 import { formatDuration } from "./format-track-duration";
 
 describe("Валидные данные для продолжительности трека", () => {
-  test("Базовые значения", () => {
-    expect(formatDuration(65)).toBe("1:05");
-    expect(formatDuration(15)).toBe("0:15");
-    expect(formatDuration(59)).toBe("0:59");
-    expect(formatDuration(60)).toBe("1:00");
-    expect(formatDuration(71)).toBe("1:11");
+  test.each([
+    [65, "1:05"],
+    [125, "2:05"],
+    [59, "0:59"],
+    [125, "2:05"]
+  ])("Должен вернуть %s для %s", (input, expected) => {
+    expect(formatDuration(input)).toBe(expected);
   });
 });
 

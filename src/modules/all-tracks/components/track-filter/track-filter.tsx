@@ -79,6 +79,8 @@ export const TrackFilter = ({ filtersList }: Props) => {
     ];
   });
 
+  console.log(filterGroups, "filterGroups");
+
   const handleFilterChange =
     (groupKey: string, itemValue: string) => (checked: boolean) => {
       setFilterGroups((prevGroups) =>
