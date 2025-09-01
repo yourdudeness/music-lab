@@ -15,7 +15,10 @@ export const TrackList = () => {
 
   return (
     <>
-      <TrackFilter filtersList={trackList.data || []} />
+      <TrackFilter
+        filtersList={trackList.data || []}
+        loading={trackList.isLoading}
+      />
       <div className={clsx(styles.root, "max-w-7xl w-full overflow-auto")}>
         <HeaderTrackList />
         <TrackListBody

@@ -1,16 +1,9 @@
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger
-} from "@/shared/components/DropDownMenu/drop-down-primitivies";
-
 import styles from "./track-filter.module.css";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { TracksData } from "../../api/get-tracks";
-import { set } from "react-hook-form";
+import { TrackFilterItem } from "./track-filter-item";
 
 interface FilterItem {
   value: string;
@@ -19,7 +12,7 @@ interface FilterItem {
   disabled?: boolean;
 }
 
-interface FilterGroup {
+export interface FilterGroup {
   title: string;
   key: string;
   items: FilterItem[];
@@ -27,17 +20,16 @@ interface FilterGroup {
 
 type Props = {
   filtersList: TracksData;
+  loading?: boolean;
 };
 
-export const TrackFilter = ({ filtersList }: Props) => {
-  const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(() => {
-    if (!filtersList.length)
-      return [
-        { title: "Исполнителю", key: "authors", items: [] },
-        { title: "Году выпуска", key: "years", items: [] },
-        { title: "Жанру", key: "genres", items: [] }
-      ];
-
+export const TrackFilter = ({ filtersList, loading }: Props) => {
+  const [filterGroups, setFilterGroups] = useState<FilterGroup[]>([
+    { title: "Исполнителю", key: "authors", items: [] },
+    { title: "Году выпуска", key: "years", items: [] },
+    { title: "Жанру", key: "genres", items: [] }
+  ]);
+  useEffect(() => {
     const uniqueValues = filtersList.reduce(
       (acc, track) => {
         acc.authors.add(track.author);
@@ -48,7 +40,7 @@ export const TrackFilter = ({ filtersList }: Props) => {
       { authors: new Set(), genres: new Set(), years: new Set() }
     );
 
-    return [
+    setFilterGroups([
       {
         title: "Исполнителю",
         key: "authors",
@@ -76,26 +68,8 @@ export const TrackFilter = ({ filtersList }: Props) => {
           checked: false
         }))
       }
-    ];
-  });
-
-  console.log(filterGroups, "filterGroups");
-
-  const handleFilterChange =
-    (groupKey: string, itemValue: string) => (checked: boolean) => {
-      setFilterGroups((prevGroups) =>
-        prevGroups.map((group) =>
-          group.key === groupKey
-            ? {
-                ...group,
-                items: group.items.map((item) =>
-                  item.value === itemValue ? { ...item, checked } : item
-                )
-              }
-            : group
-        )
-      );
-    };
+    ]);
+  }, [filtersList]);
 
   return (
     <div
@@ -108,20 +82,11 @@ export const TrackFilter = ({ filtersList }: Props) => {
         Искать по:
       </h4>
       {filterGroups.map((group) => (
-        <DropdownMenu key={group.key}>
-          <DropdownMenuTrigger>{group.title}</DropdownMenuTrigger>
-          <DropdownMenuContent data-side="left">
-            {group.items.map((list) => (
-              <DropdownMenuCheckboxItem
-                checked={list.checked}
-                onCheckedChange={handleFilterChange(group.key, list.value)}
-                key={list.value}
-              >
-                {list.value}
-              </DropdownMenuCheckboxItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <TrackFilterItem
+          key={group.key}
+          filterItem={group}
+          setFilterGroups={setFilterGroups}
+        />
       ))}
     </div>
   );

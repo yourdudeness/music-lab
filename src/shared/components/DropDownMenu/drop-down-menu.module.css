@@ -23,17 +23,23 @@
   gap: var(--24px);
   max-height: var(--radix-dropdown-menu-content-available-height);
   overflow-x: auto;
+  outline: none;
 }
 
 .menu-item {
   display: flex;
   align-items: center;
   cursor: pointer;
+  outline: none;
   &:hover {
     color: var(--violet-4);
   }
 
   &[data-state="checked"] {
     color: var(--violet-4);
+  }
+
+  &:focus-visible {
+    outline: none !important;
   }
 }
