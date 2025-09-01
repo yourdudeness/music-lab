@@ -40,4 +40,18 @@
       --_button-border-color: var(--violet-3);
     }
   }
+
+  &[data-intent="ghost"] {
+    --_button-bg: transparent;
+    --_button-color: var(--white);
+  }
+
+  &[data-shape="round"] {
+    --_button-radius: 50%;
+  }
+
+  &[data-size="m"] {
+    --_button-width: var(--40px);
+    --_button-height: var(--40px);
+  }
 }

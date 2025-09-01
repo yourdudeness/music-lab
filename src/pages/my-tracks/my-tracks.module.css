@@ -1,0 +1,6 @@
+.main {
+  grid-area: 2 / 2 / 8 / 5;
+
+  padding: 0 var(--16px);
+  overflow-x: auto;
+}

@@ -1,0 +1,13 @@
+.playlist-wrap {
+  grid-area: 2 / 5 / 8 / 6;
+}
+
+.playlist-item {
+  max-width: var(--250px);
+  width: 100%;
+  height: var(--150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #271a58 0%, #7868cc 100%);
+}

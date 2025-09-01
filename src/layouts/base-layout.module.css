@@ -1,0 +1,10 @@
+.base {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  height: 100dvh;
+}
+
+.sign-out-button {
+  grid-area: 1 / 5 / 2 / 6;
+}

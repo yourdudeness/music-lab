@@ -1,0 +1,35 @@
+.track-item {
+  display: grid;
+  grid-template-columns:
+    [index] minmax(17rem, 4fr) [first] minmax(12.5rem, 3fr)
+    [var1] minmax(11.2rem, var(--col2, 2fr)) [last] minmax(7.5rem, 1fr);
+
+  margin-bottom: var(--12px);
+  grid-gap: var(--32px);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.track__content {
+  display: flex;
+  align-items: center;
+}
+
+.track__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track__icon {
+  width: 3.125rem;
+  height: 3.125rem;
+  background-color: #313131;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4e4e4e;
+  flex-shrink: 0;
+}

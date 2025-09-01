@@ -3,6 +3,9 @@
   src: url(../src/assets/font/Roboto-Regular.ttf);
 }
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-roboto: Roboto, "sans-serif";
@@ -14,6 +17,7 @@
 :root {
   line-height: 1.5;
   font-weight: 400;
+  width: 100%;
 
   color-scheme: light dark;
 
@@ -24,14 +28,19 @@
 
   --6px: 0.375rem;
   --8px: 0.5rem;
+  --10px: 0.625rem;
   --12px: 0.75rem;
   --16px: 1rem;
+  --20px: 1.25rem;
   --24px: 1.5rem;
   --32px: 2rem;
   --40px: 2.5rem;
   --48px: 3rem;
   --52px: 3.25rem;
+  --60px: 3.75rem;
   --80px: 5rem;
+  --150px: 9.375rem;
+  --250px: 15.625rem;
   --278px: 17.375rem;
   --366px: 22.875;
 
@@ -39,18 +48,25 @@
   --violet-1: #580ea2;
   --violet-2: #3f007d;
   --violet-3: #271a58;
+  --violet-4: rgba(182, 114, 255, 1);
 
   --white-1: #ffffff;
 
   --black-1: #000000;
+  --black-2: rgba(24, 24, 24, 1);
+  --black-3: rgba(28, 28, 28, 1);
+  --black-4: rgba(49, 49, 49, 1);
 
   --gray-1: #f4f5f6;
   --gray-2: #d9d9d9;
+  --gray-3: #4e4e4e;
+  --gray-4: rgba(78, 78, 78, 1);
 
   --border-color: #d0cece;
 
   --radius-1: var(--6px);
   --radius-2: var(--12px);
+  --radius-3: var(--60px);
 
   --size-7: var(--278px);
   --size-8: var(--366px);
@@ -61,6 +77,13 @@
   --text-color: #d0cece;
 
   --padding-1: var(--8px);
+  --padding-2: var(--32px);
+
+  --radius: 0.625rem;
+
+  --background: oklch(1 0 0);
+
+  --foreground: oklch(0.145 0 0);
 }
 
 a {
@@ -79,7 +102,12 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100%;
+  width: 100%;
+}
+
+#root {
+  width: 100%;
 }
 
 @media (prefers-color-scheme: light) {
@@ -90,6 +118,24 @@ body {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    background-color: var(--black-1);
+    background-color: var(--black-2);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+.dark {
+  --background: rgba(24, 24, 24, 1);
+  --foreground: oklch(0.985 0 0);
+}
+
+@layer base {
+  * {
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

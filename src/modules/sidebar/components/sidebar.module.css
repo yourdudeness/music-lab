@@ -1,6 +1,8 @@
 .root {
   color: var(--white-1);
 
+  grid-area: 1 / 1 / 8 / 2;
+
   .handle-color {
     width: var(--40px);
     height: var(--40px);
