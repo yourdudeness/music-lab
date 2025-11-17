@@ -6,32 +6,35 @@ import { SignUpPage } from "./pages/sign-up";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { RequireAuth } from "./shared/components/require-auth/require-auth";
 import { BaseLayout } from "./layouts/base-layout";
+import { PlayerProvider } from "./contexts/PlayerContext";
 
 export const AppRoutes = () => {
   return (
-    <Routes>
-      <Route
-        element={
-          <AuthProvider>
-            <Outlet />
-          </AuthProvider>
-        }
-      >
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-      </Route>
+    <PlayerProvider>
+      <Routes>
+        <Route
+          element={
+            <AuthProvider>
+              <Outlet />
+            </AuthProvider>
+          }
+        >
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+        </Route>
 
-      <Route
-        element={
-          <AuthProvider>
-            <RequireAuth>
-              <BaseLayout />
-            </RequireAuth>
-          </AuthProvider>
-        }
-      >
-        <Route path="/" element={<Main />} />
-      </Route>
-    </Routes>
+        <Route
+          element={
+            <AuthProvider>
+              <RequireAuth>
+                <BaseLayout />
+              </RequireAuth>
+            </AuthProvider>
+          }
+        >
+          <Route path="/" element={<Main />} />
+        </Route>
+      </Routes>
+    </PlayerProvider>
   );
 };
